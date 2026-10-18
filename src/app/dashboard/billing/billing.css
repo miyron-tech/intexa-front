@@ -1,0 +1,27 @@
+.workspace-shell:has(.billing-page) {
+  --paper: #e5e6de;
+  --surface: #eef0e7;
+  --ink-muted: #5b6253;
+  --line: rgba(32, 38, 25, .19);
+}
+.workspace-shell:has(.billing-page) .ws-sidebar { background: #d7dbce; }
+.workspace-shell:has(.billing-page) .ws-topbar { background: #dfe2d7; color: #5b6253; }
+.workspace-shell:has(.billing-page) .ws-note { background: #cbd2bc; }
+.workspace-shell:has(.billing-page) .ws-sidebar nav a.active { background: #c6d0b2; }
+.billing-page .ws-page-heading p,
+.billing-page .ws-eyebrow { color: #5b6253; }
+.billing-page fieldset > div > label,
+.billing-page section[aria-label="Billing details"] { background: #dce0d3; }
+.billing-page fieldset > div > label:has(input:checked) { background: #edf0e4; }
+.billing-page input:not([type="radio"]):not([type="hidden"]):not([type="range"]) { background: #eef0e7; }
+.custom-package { border: 1px solid var(--line); border-radius: 16px; background: #dce0d3; overflow: hidden; }
+.custom-package.is-selected { border-color: var(--ink); background: #edf0e4; }
+.custom-package-choice { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px; cursor: pointer; }
+.custom-package-controls { padding: 0 24px 24px; }
+.custom-package-values { display: grid; grid-template-columns: minmax(0, 200px) minmax(0, 1fr); align-items: end; gap: 24px; }
+.billing-page input.custom-credit-slider { width: 100%; height: 28px; margin: 24px 0 10px; padding: 0; accent-color: #536337; cursor: pointer; background: transparent; }
+@media(max-width: 480px) {
+  .custom-package-choice { padding: 20px; }
+  .custom-package-controls { padding: 0 20px 20px; }
+  .custom-package-values { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+}

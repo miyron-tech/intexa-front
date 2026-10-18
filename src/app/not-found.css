@@ -1,0 +1,65 @@
+.liquid-glass {
+  background: linear-gradient(160deg, rgba(234, 255, 130, 0.14), rgba(234, 255, 130, 0.04) 55%, rgba(234, 255, 130, 0.09));
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(10px) saturate(1.15);
+  -webkit-backdrop-filter: blur(10px) saturate(1.15);
+  border: none;
+  box-shadow: inset 0 1px 1px rgba(234, 255, 130, 0.22), 0 20px 60px rgba(6, 12, 8, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(180deg,
+    rgba(234,255,130,0.55) 0%, rgba(234,255,130,0.18) 20%,
+    rgba(234,255,130,0) 40%, rgba(234,255,130,0) 60%,
+    rgba(234,255,130,0.18) 80%, rgba(234,255,130,0.5) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+body:has(.not-found-experience) > :is(.site-header, .app-header) { display: none; }
+.not-found-experience { color: #fff; background: #14202b url('/media/not-found/poster.webp') center / cover fixed; isolation: isolate; }
+.lost-shade { z-index: 1; background: linear-gradient(180deg, #08121b55 0%, #08121b22 25%, #06121c66 65%, #050d15dd 100%); }
+.lost-nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 104px; border-bottom: 1px solid #ffffff26; }
+.lost-coordinate, .lost-eyebrow, .lost-scene-bar { font-size: 9px; letter-spacing: 2px; }
+.lost-coordinate { opacity: .65; }
+.lost-wordmark { display: inline-flex; align-items: center; font-size: 24px; font-weight: 650; letter-spacing: -1.3px; line-height: 1; color: #fff; white-space: nowrap; }
+.lost-wordmark .brand-domain { color: #eaff82; opacity: .85; }
+.lost-workspace { display: flex; gap: 16px; align-items: center; font-size: 12px; }
+.lost-hero { text-align: center; padding-top: 52px; }
+.lost-eyebrow { display: flex; gap: 9px; justify-content: center; align-items: center; }
+.lost-eyebrow > span { width: 5px; height: 5px; background: #eaff82; border-radius: 100%; box-shadow: 0 0 12px #eaff8240; }
+.lost-number { font-size: clamp(180px, 28vw, 370px); font-weight: 400; letter-spacing: -.085em; padding-right: .085em; line-height: 1; color: #eaff8224; -webkit-text-stroke: 1px #eaff82b3; text-shadow: 0 1px 50px #eaff8226; margin: 5px 0 8px; }
+.lost-hero h1 { font-size: clamp(34px, 4.8vw, 62px); line-height: 1.06; font-weight: 400; letter-spacing: -.045em; }
+.lost-description { font-size: 14px; line-height: 1.7; margin: 20px auto 0; color: #ffffffe0; max-width: 460px; text-shadow: 0 1px 15px #000; }
+.lost-actions { display: flex; align-items: center; justify-content: center; gap: 26px; margin-top: 30px; }
+.lost-home { display: flex; align-items: center; gap: 13px; border-radius: 100px; background: #eaff82; color: #242820; padding: 17px 23px; font-size: 13px; transition: background .2s; }
+.lost-home:hover { background: #d9f668; }
+.lost-home-note { font-size: 8px; letter-spacing: 1px; opacity: .5; margin-left: 22px; }
+.lost-create { display: flex; align-items: center; gap: 10px; font-size: 12px; padding: 12px 0; border-bottom: 1px solid #ffffff50; }
+.lost-scene-bar { display: flex; justify-content: space-between; align-items: center; margin-top: 72px; color: #ffffffb3; gap: 15px; }
+.lost-scene-bar button { display: flex; align-items: center; gap: 10px; padding: 12px 0 12px 12px; cursor: pointer; }
+.not-found-experience :is(a, button):focus-visible { outline: 2px solid #eaff82; outline-offset: 5px; border-radius: 4px; }
+@media (max-width: 767px) {
+  .lost-nav { min-height: 80px; gap: 12px; }
+  .lost-coordinate { display: none; }
+  .lost-workspace { font-size: 10px; gap: 6px; }
+  .lost-hero { padding-top: 65px; }
+  .lost-eyebrow { font-size: 8px; letter-spacing: 1.3px; }
+  .lost-number { font-size: clamp(170px, 57vw, 330px); margin: 27px 0 22px; }
+  .lost-description { font-size: 13px; max-width: 310px; }
+  .lost-actions { flex-direction: column; gap: 15px; }
+  .lost-scene-bar { margin-top: 66px; font-size: 7px; letter-spacing: 1px; }
+  .not-found-experience footer h2 { font-size: 10px; letter-spacing: .07em; line-height: 1.6; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .not-found-experience video { visibility: hidden; }
+  .not-found-experience video[data-playing="true"] { visibility: visible; }
+  .not-found-experience *, .not-found-experience *::before { animation: none !important; transition: none !important; }
+}

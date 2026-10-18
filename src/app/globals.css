@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+/* Design tokens: warm paper ground, near-black ink, one coral accent */
+:root {
+  --paper: #f5f3ee;
+  --surface: #fbfaf6;
+  --surface-2: #eeeee5;
+  --ink: #20211f;
+  --ink-muted: #75796b;
+  --line: rgba(20, 20, 19, 0.12);
+  --accent: #75864c;
+  --accent-ink: #252b20;
+  --accent-soft: #e9eedb;
+  --ok: #1f7a5c;
+  --warn: #9a6400;
+  --danger: #c0392b;
+  --shadow: 0 1px 2px rgba(20, 20, 19, 0.06), 0 8px 24px rgba(20, 20, 19, 0.06);
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-danger: var(--danger);
+  --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+@layer components {
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+  }
+
+  /* Selectable option card: the radio inside drives the selected state */
+  .option {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px;
+    background: var(--surface);
+    transition:
+      border-color 0.15s ease,
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+  .option:hover {
+    border-color: var(--ink-muted);
+  }
+  .option:has(input:checked) {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .option:has(input:focus-visible) {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 22px;
+    border-radius: 100px;
+    font-weight: 500;
+    transition:
+      opacity 0.15s ease,
+      background-color 0.15s ease;
+  }
+  .btn-primary {
+    background: #eaff82;
+    color: #252b20;
+  }
+  .btn-primary:hover {
+    opacity: 0.9;
+  }
+  .btn-primary:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .btn-ghost {
+    border: 1px solid var(--line);
+    color: var(--ink);
+  }
+  .btn-ghost:hover {
+    background: var(--surface-2);
+  }
+
+  .field {
+    height: 44px;
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 0 14px;
+    color: var(--ink);
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+  textarea.field {
+    height: auto;
+    padding: 12px 14px;
+    line-height: 1.55;
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .field[aria-invalid="true"] {
+    border-color: var(--danger);
+  }
+
+  /* One wordmark for the landing and the studio: same type settings everywhere */
+  .brand-wordmark {
+    display: inline-flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 650;
+    letter-spacing: -1.3px;
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  /* Same lime as the "Start creating" button (--lime in studio.css) */
+  .brand-wordmark .brand-tld {
+    color: #eaff82;
+  }
+
+  .label {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .hint {
+    font-size: 12px;
+    color: var(--ink-muted);
+  }
+}
+
+.brand-wordmark{display:inline-flex;align-items:center;font-size:23px;font-weight:650;letter-spacing:-1.3px;white-space:nowrap}.brand-wordmark .brand-star{color:#7e8968;font-size:24px;margin:0 1px}.brand-wordmark .brand-tld{font-size:9px;align-self:flex-start;margin:2px 0 0 4px;letter-spacing:0}
+.app-header .btn-primary{background:#252922;color:#f5f3ee}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+
+.brand-wordmark .brand-domain,.studio-wordmark .brand-domain{color:#858f74;font-size:.7em;letter-spacing:-.5px;align-self:baseline;margin-left:1px}
