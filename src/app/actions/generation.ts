@@ -7,6 +7,7 @@ import type { Job } from "@/lib/generation";
 import { requireUser } from "@/lib/session";
 
 export interface GenerationFormState {
+  job?: Job;
   message?: string;
   values?: Record<string, string>;
 }
@@ -60,6 +61,8 @@ export async function createJob(
         count: num(formData.get("count")),
         marketplace: str(formData.get("marketplace")),
         aspectRatio: str(formData.get("aspectRatio")),
+        outputWidth: num(formData.get("outputWidth")),
+        outputHeight: num(formData.get("outputHeight")),
         title: str(formData.get("title")),
         badge: str(formData.get("badge")),
         videoModel: str(formData.get("videoModel")),
@@ -83,6 +86,7 @@ export async function createJob(
   }
 
   revalidatePath("/dashboard", "layout");
+  if (formData.get('inline') === 'true') return { job };
   redirect(`/dashboard/jobs/${job.id}`);
 }
 
@@ -100,5 +104,6 @@ export async function extendVideo(_state: GenerationFormState, formData: FormDat
     return {message:error instanceof ApiError && error.status<500 ? error.messages.join('. ') : 'Could not start the continuation. Please try again.'};
   }
   revalidatePath('/dashboard','layout');
+  if (formData.get('inline') === 'true') return { job };
   redirect(`/dashboard/jobs/${job.id}`);
 }

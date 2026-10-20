@@ -30,7 +30,7 @@ export function JobCard({
 
   return (
     <Link
-      href={`/dashboard/jobs/${job.id}`}
+      href={`/dashboard/${job.service === "content_optimization" ? "content" : ["video_ad","character_swap"].includes(job.service) ? "video" : "images"}?job=${job.id}`}
       className="card ws-job-card transition hover:border-accent"
     >
       <div className="ws-job-thumb">
@@ -43,7 +43,7 @@ export function JobCard({
           />
         ) : (
           <span className="text-xs text-ink-muted">
-            {isVideo ? "▷ Video creation" : job.status === "failed" ? "Let’s try another take" : "✳ Bringing your idea to life"}
+            {job.service === "content_optimization" ? "✦ TikTok captions" : isVideo ? "▷ Video creation" : job.status === "failed" ? "Let’s try another take" : "✳ Bringing your idea to life"}
           </span>
         )}
       </div>
