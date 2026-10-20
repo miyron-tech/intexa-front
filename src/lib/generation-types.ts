@@ -1,7 +1,7 @@
 // Types and constants without server-only: client components import these too
 
 export type ServiceId =
-  "marketplace_card" | "product_shot" | "video_ad" | "avatar" | "character_swap";
+  "marketplace_card" | "product_shot" | "video_ad" | "avatar" | "character_swap" | "content_optimization";
 export type JobStatus = "queued" | "running" | "succeeded" | "failed";
 
 export interface Preset {
@@ -33,7 +33,7 @@ export interface ServiceDefinition {
   id: ServiceId;
   title: string;
   description: string;
-  kind: "image" | "video";
+  kind: "image" | "video" | "text";
   inputImages: { min: number; max: number; label: string };
   presets: Preset[];
   maxOutputs: number;
