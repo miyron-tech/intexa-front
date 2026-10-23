@@ -88,3 +88,25 @@ export async function logout(): Promise<void> {
   await clearSession();
   redirect("/login");
 }
+
+export type RecoveryState = { success?: boolean; message?: string; email?: string };
+export async function requestPasswordReset(_state: RecoveryState, data: FormData): Promise<RecoveryState> {
+  const email = String(data.get("email") ?? "").trim().toLowerCase();
+  if (!z.email().max(320).safeParse(email).success) return { email, message: "Enter a valid email address" };
+  try {
+    await api("/auth/forgot-password", { method: "POST", auth: false, body: JSON.stringify({ email }) });
+    return { success: true, email };
+  } catch (error) { return { email, message: apiErrorMessage(error) }; }
+}
+export async function resetPassword(_state: RecoveryState, data: FormData): Promise<RecoveryState> {
+  const password = String(data.get("password") ?? "");
+  const parsed = RegisterSchema.safeParse({ email: "validation@example.com", password, confirmPassword: data.get("confirmPassword"), acceptTerms: "on" });
+  if (!parsed.success) return { message: parsed.error.issues[0].message };
+  const token = String(data.get("token") ?? "");
+  if (!/^[A-Za-z0-9_-]{43}$/.test(token)) return { message: "This reset link is invalid. Request a new one." };
+  try {
+    await api("/auth/reset-password", { method: "POST", auth: false, body: JSON.stringify({ token, password }) });
+    await clearSession();
+    return { success: true };
+  } catch (error) { return { message: apiErrorMessage(error) }; }
+}
