@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState } from "react";
 import { login } from "@/app/actions/auth";
 import { Field } from "@/components/field";
@@ -27,6 +28,7 @@ export function LoginForm({ next }: { next?: string }) {
         required
         errors={state?.errors?.password}
       />
+      <Link href="/forgot-password" className="self-end text-sm text-ink-muted hover:underline">Forgot password?</Link>
       {state?.message && (
         <p role="alert" className="text-sm text-danger">
           {state.message}
